@@ -1,0 +1,46 @@
+{
+  "keys": [
+    "intake",
+    "devices",
+    "slicing",
+    "baseline",
+    "loss",
+    "reconcile",
+    "archive"
+  ],
+  "devices": {
+    "INV-A": {
+      "zone": "东区",
+      "capacity_kw": "100",
+      "reference": false
+    },
+    "REF-A1": {
+      "zone": "东区",
+      "capacity_kw": "100",
+      "reference": true
+    },
+    "REF-A2": {
+      "zone": "东区",
+      "capacity_kw": "100",
+      "reference": true
+    },
+    "INV-B": {
+      "zone": "西区",
+      "capacity_kw": "50",
+      "reference": false
+    },
+    "REF-B1": {
+      "zone": "西区",
+      "capacity_kw": "50",
+      "reference": true
+    },
+    "REF-B2": {
+      "zone": "西区",
+      "capacity_kw": "50",
+      "reference": true
+    }
+  },
+  "cadence_seconds": 600,
+  "irradiance_bin": "100",
+  "min_references": 2
+}

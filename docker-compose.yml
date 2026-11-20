@@ -1,0 +1,18 @@
+name: p1117-solarcurtail
+services:
+  app:
+    build: .
+    ports:
+      - "${PORT:-18244}:8000"
+    environment:
+      DB_PATH: /data/workbench.sqlite
+      TZ: Asia/Shanghai
+    volumes:
+      - workspace:/data
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/healthz')"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+volumes:
+  workspace:

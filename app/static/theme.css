@@ -1,0 +1,23 @@
+:root {
+ --bg: #092c2c;
+ --rail: #062322;
+ --surface: #103b39;
+ --surface-2: #174744;
+ --ink: #d9eeea;
+ --ink-muted: #83aaa2;
+ --line: #2b5751;
+ --line-strong: #4c776c;
+ --accent: #ebc95b;
+ --accent-ink: #2d2d16;
+ --ok: #65b994;
+ --warn: #d6a45c;
+ --bad: #e28880;
+ --info: #78b7c9;
+ --font-ui: "DIN Alternate", "PingFang SC", sans-serif;
+ --font-num: "Andale Mono", monospace;
+ --radius: 5px;
+ --row: 32px;
+ --pad: 16px;
+ --gap: 14px;
+ --shadow: none;
+}
