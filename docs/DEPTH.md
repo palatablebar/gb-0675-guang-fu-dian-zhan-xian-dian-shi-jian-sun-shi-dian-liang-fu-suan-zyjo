@@ -29,6 +29,13 @@
 | TRAP-06 | 全角千分位 | 静默错算或证据丢失 | 以可复核规则显式处理 | `app/modules/devices/rules.py` | `tests/test_devices.py::test_fullwidth_number` |
 | TRAP-11 | UTC归一 | 静默错算或证据丢失 | 以可复核规则显式处理 | `app/modules/devices/rules.py` | `tests/test_devices.py::test_time_equivalence` |
 | TRAP-23 | 限电区间并集 | 静默错算或证据丢失 | 以可复核规则显式处理 | `app/modules/slicing/rules.py` | `tests/test_slicing.py::test_overlapping_real` |
+| TRAP-24 | 容量凭证取值冲突 | 按任一铭牌硬算 | 片段保持待复核并列出候选凭证 | `app/capacity.py` | `tests/test_capacity.py::test_conflict_two_values_pending` |
+| TRAP-25 | 容量有效期空档 | 静默沿用旧容量 | 片段保持待复核，不回退猜测 | `app/capacity.py` | `tests/test_capacity.py::test_gap_when_validity_expired` |
+| TRAP-26 | 重跑重复生成证据 | 重复写库或覆盖已复核 | 内容寻址批号，重跑幂等，失败保留旧版 | `app/store.py` | `tests/test_capacity.py::test_rerun_no_duplicate_capacity_evidence` |
+
+## 容量凭证裁定
+
+容量以凭证（编号、额定kW、生效区间、来源）进入限电损失：切片按有效期边界切分后，每片段须被唯一取值凭证完整覆盖，基线与损失共用同一`capacity_ref`；冲突或空档片段保持待复核。对照机容量无凭证覆盖其观测区间时剔除该对照。裁定逻辑集中在 `app/capacity.py`，由设备映射、事件切片、基线拟合共用；演示批为 `retrofit`（INV-C冲突、INV-D空档+新铭牌）。
 
 ## 对账规则
 

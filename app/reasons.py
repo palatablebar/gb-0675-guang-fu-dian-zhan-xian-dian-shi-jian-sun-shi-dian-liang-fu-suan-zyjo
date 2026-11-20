@@ -4,6 +4,8 @@ REASONS = {
     'BAD_UNIT':'单位不受支持', 'UNKNOWN_REFERENCE':'引用对象不存在', 'INVALID_RANGE':'范围错误',
     'VERSION_CONFLICT':'版本冲突', 'EMPTY_FILE':'空文件', 'BLANK_FILE':'全空行',
     'HEADER_ONLY':'仅有表头', 'STALE_VERSION':'复核版本已更新', 'NOT_FOUND':'批次不存在',
+    'CAPACITY_CONFLICT':'容量凭证取值冲突', 'CAPACITY_GAP':'容量有效期空档',
+    'BAD_CAPACITY_VALIDITY':'容量凭证有效期无法解析',
 }
 def reject(state, record, code, detail):
     state['quarantine'].append({'line':record.get('_line',0),'id':record.get('id',''),

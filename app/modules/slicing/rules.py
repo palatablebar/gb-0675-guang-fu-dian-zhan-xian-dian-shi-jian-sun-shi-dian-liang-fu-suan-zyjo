@@ -1,4 +1,5 @@
 from app.coerce import instant
+from app.capacity import credentials_for, edges
 from datetime import timedelta
 from collections import defaultdict
 
@@ -21,6 +22,9 @@ def slice_intervals(records,context):
         readings=sorted(samples[device],key=lambda r:instant(r['at']))
         for merged in union_events(events):
             start,end=merged['start'],merged['end'];boundaries={start,end}
+            for cred in credentials_for(context,device):
+                for boundary in edges(cred):
+                    if boundary is not None and start<boundary<end:boundaries.add(boundary)
             for row in readings:
                 at=instant(row['at']);expires=at+timedelta(seconds=cadence)
                 if start<at<end:boundaries.add(at)

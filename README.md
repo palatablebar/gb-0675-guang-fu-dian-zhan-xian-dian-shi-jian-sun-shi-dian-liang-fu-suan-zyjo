@@ -11,7 +11,9 @@ docker compose exec -T app pytest -q
 
 访问 http://localhost:18244 。启动直接载入现场脏批。切换干净样例和旧编码样例可对照核验。完整对照批INV-A重叠事件取并集后30分钟，基线100kW、实际60kW，损失20kWh；无合格对照或遥测冲突必须保持未定，不能填0。
 
-各模块页面对应 `/<模块英文名>`，各模块执行入口为 `POST /api/<模块英文名>`，不传参即可独立演示。完整运行 `POST /api/runs` 支持 `dataset`（dirty/clean/legacy）、`csv_text` 与 `overrides` 参数。批次历史 `GET /api/runs`，详情 `GET /api/runs/{run_id}`。
+容量以凭证进场：每份凭证含编号、额定kW、生效区间与来源文号，未登凭证的设备回退台账额定。每片段须被唯一取值的凭证完整覆盖方可复算；取值冲突（CAPACITY_CONFLICT）或有效期空档（CAPACITY_GAP）的片段基线与损失保持未定，不按任一铭牌硬算。基线与损失共用同一capacity_ref，页面逐段显示容量来源，待查片段单列候选凭证。技改冲突批INV-C铭牌100kW与技改资料120kW有效期重叠，两段保持待复核；INV-D旧铭牌10:10失效、新铭牌60kW自10:20生效，10:10–10:20空档待复核，其余两段按对应凭证复算，确定损失10.0000kWh。`overrides`可提交`capacity_credentials`按新铭牌复算，生成新批次，不覆盖已确认旧批。
+
+各模块页面对应 `/<模块英文名>`，各模块执行入口为 `POST /api/<模块英文名>`，不传参即可独立演示。完整运行 `POST /api/runs` 支持 `dataset`（dirty/clean/legacy/retrofit）、`csv_text` 与 `overrides` 参数。批次历史 `GET /api/runs`，详情 `GET /api/runs/{run_id}`。
 
 同输入与规则版本生成相同批号，只保留一条批次。复核入口 `POST /api/runs/{run_id}/review` 提交当前 `revision`，陈旧提交409。归档包只有一个下载入口 `GET /api/export/{run_id}`，含证据和运行摘要。原始隔离在页面同屏显示。
 

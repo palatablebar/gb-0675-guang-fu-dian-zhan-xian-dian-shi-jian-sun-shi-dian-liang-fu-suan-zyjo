@@ -1,4 +1,5 @@
 from app.coerce import number,instant
+from app.capacity import resolve_at
 from app.errors import BusinessError
 from app.reasons import reject
 from collections import defaultdict
@@ -13,10 +14,12 @@ def normalize(row,context):
     if row['kind']!='TELEMETRY':raise BusinessError('BAD_KIND','记录类型无效')
     factor={'kW':1,'MW':1000}.get(row['unit'])
     if factor is None:raise BusinessError('BAD_UNIT','功率单位无效')
-    power=number(row['power'])*factor;irr=number(row['irradiance'])
-    if power<0 or irr<0 or power>number(device['capacity_kw'])*number('1.2'):raise BusinessError('INVALID_RANGE','功率或辐照度超出范围')
+    power=number(row['power'])*factor;irr=number(row['irradiance']);at=instant(row['at'])
+    cred,capacity_code,_=resolve_at(context,row['device'],at,context['cadence_seconds'])
+    # 容量凭证冲突或有效期空档时不做上限拦截，保留遥测，由基线裁定对应片段待复核。
+    if power<0 or irr<0 or (capacity_code=='CAPACITY_OK' and power>number(cred['capacity_kw'])*number('1.2')):raise BusinessError('INVALID_RANGE','功率或辐照度超出范围')
     if row['status'] not in {'健康','故障'}:raise BusinessError('BAD_STATUS','设备状态无效')
-    return {**row,'at':instant(row['at']).isoformat(),'power_kw':str(power),'irradiance':str(irr),'zone':device['zone']}
+    return {**row,'at':at.isoformat(),'power_kw':str(power),'irradiance':str(irr),'zone':device['zone']}
 def apply(state):
     good=[]
     for row in state['records']:

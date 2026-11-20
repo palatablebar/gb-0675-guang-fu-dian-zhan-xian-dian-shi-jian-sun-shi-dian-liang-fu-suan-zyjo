@@ -1,0 +1,100 @@
+{
+  "devices": {
+    "INV-C": {
+      "zone": "东区",
+      "capacity_kw": "100",
+      "reference": false
+    },
+    "REF-C1": {
+      "zone": "东区",
+      "capacity_kw": "100",
+      "reference": true
+    },
+    "REF-C2": {
+      "zone": "东区",
+      "capacity_kw": "100",
+      "reference": true
+    },
+    "INV-D": {
+      "zone": "西区",
+      "capacity_kw": "50",
+      "reference": false
+    },
+    "REF-D1": {
+      "zone": "西区",
+      "capacity_kw": "50",
+      "reference": true
+    },
+    "REF-D2": {
+      "zone": "西区",
+      "capacity_kw": "50",
+      "reference": true
+    }
+  },
+  "capacity_credentials": [
+    {
+      "id": "CAP-C-PLATE",
+      "device": "INV-C",
+      "capacity_kw": "100",
+      "valid_from": "2026-01-01T00:00:00+08:00",
+      "valid_to": null,
+      "source": "出厂铭牌照片"
+    },
+    {
+      "id": "CAP-C-RETRO",
+      "device": "INV-C",
+      "capacity_kw": "120",
+      "valid_from": "2026-10-01T00:00:00+08:00",
+      "valid_to": null,
+      "source": "技改竣工资料"
+    },
+    {
+      "id": "CAP-C1-LEDGER",
+      "device": "REF-C1",
+      "capacity_kw": "100",
+      "valid_from": "2026-01-01T00:00:00+08:00",
+      "valid_to": null,
+      "source": "台账额定"
+    },
+    {
+      "id": "CAP-C2-LEDGER",
+      "device": "REF-C2",
+      "capacity_kw": "100",
+      "valid_from": "2026-01-01T00:00:00+08:00",
+      "valid_to": null,
+      "source": "台账额定"
+    },
+    {
+      "id": "CAP-D-OLD",
+      "device": "INV-D",
+      "capacity_kw": "50",
+      "valid_from": "2026-01-01T00:00:00+08:00",
+      "valid_to": "2026-10-15T10:10:00+08:00",
+      "source": "出厂铭牌照片"
+    },
+    {
+      "id": "CAP-D-NEW",
+      "device": "INV-D",
+      "capacity_kw": "60",
+      "valid_from": "2026-10-15T10:20:00+08:00",
+      "valid_to": null,
+      "source": "技改铭牌照片"
+    },
+    {
+      "id": "CAP-D1-LEDGER",
+      "device": "REF-D1",
+      "capacity_kw": "50",
+      "valid_from": "2026-01-01T00:00:00+08:00",
+      "valid_to": null,
+      "source": "台账额定"
+    },
+    {
+      "id": "CAP-D2-LEDGER",
+      "device": "REF-D2",
+      "capacity_kw": "50",
+      "valid_from": "2026-01-01T00:00:00+08:00",
+      "valid_to": null,
+      "source": "台账额定"
+    }
+  ]
+}
